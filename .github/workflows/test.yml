@@ -1,0 +1,19 @@
+name: Run Bats tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Bats
+        run: |
+          git clone https://github.com/bats-core/bats-core.git
+          cd bats-core
+          sudo ./install.sh /usr/local
+
+      - name: Run tests
+        run: bats ghgit_test.bats
